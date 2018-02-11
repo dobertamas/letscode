@@ -1,11 +1,15 @@
+import logging
+
 from selenium.webdriver.common.by import By
 from traceback import print_stack
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
+from ..utilities.custom_logger import *
 
 
 class SeleniumDriver():
+    log = customLogger(logging.DEBUG)
 
     def __init__(self, driver):
         self.driver = driver
@@ -25,7 +29,7 @@ class SeleniumDriver():
         elif locatorType == "link":
             return By.LINK_TEXT
         else:
-            print("Locator type " + locatorType + " not correct/supported")
+            self.log.info("Locator type " + locatorType + " not correct/supported")
         return False
 
     def getElement(self, locator, locatorType="id"):
