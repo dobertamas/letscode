@@ -3,21 +3,17 @@ from selenium.webdriver.common.by import By
 from ..pages.login_page import LoginPage
 import unittest
 
+
 class LoginTests(unittest.TestCase):
 
     def test_validLogin(self):
-        baseURL = "https://letskodeit.teachable.com/"
+        baseURL = "http://localhost:8084/console/login"
         driver = webdriver.Firefox()
         driver.maximize_window()
         driver.implicitly_wait(3)
         driver.get(baseURL)
 
         lp = LoginPage(driver)
-        lp.login("test@email.com", "abcabc")
+        lp.login("admin", "admin")
 
 
-        userIcon = driver.find_element(By.XPATH, ".//*[@id='navbar']//span[text()='User Settings']")
-        if userIcon is not None:
-            print("Login Successful")
-        else:
-            print("Login Failed")

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from ..base.selenium_driver import SeleniumDriver
 
+
 class LoginPage(SeleniumDriver):
 
     def __init__(self, driver):
@@ -9,9 +10,9 @@ class LoginPage(SeleniumDriver):
 
     # Locators
     _login_link = "Login"
-    _email_field = "user_email"
-    _password_field = "user_password"
-    _login_button = "commit"
+    _username_field = "username"
+    _password_field = "password"
+    _login_button = "signin"
 
     # def getLoginLink(self):
     #     return self.driver.find_element(By.LINK_TEXT, self._login_link)
@@ -28,17 +29,17 @@ class LoginPage(SeleniumDriver):
     def clickLoginLink(self):
         self.elementClick(self._login_link, locatorType="link")
 
-    def enterEmail(self, email):
-        self.sendKeys(email, self._email_field)
+    def enter_username(self, email):
+        self.sendKeys(email, self._username_field, locatorType="name")
 
     def enterPassword(self, password):
-        self.sendKeys(password, self._password_field)
+        self.sendKeys(password, self._password_field, locatorType="name")
 
     def clickLoginButton(self):
         self.elementClick(self._login_button, locatorType="name")
 
     def login(self, email, password):
-        self.clickLoginLink()
-        self.enterEmail(email)
+        #self.clickLoginLink()
+        self.enter_username(email)
         self.enterPassword(password)
         self.clickLoginButton()

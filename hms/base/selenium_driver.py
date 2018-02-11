@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
 
+
 class SeleniumDriver():
 
     def __init__(self, driver):
@@ -39,6 +40,15 @@ class SeleniumDriver():
         return element
 
     def elementClick(self, locator, locatorType="id"):
+        try:
+            element = self.getElement(locator, locatorType)
+            element.click()
+            print("Clicked on element with locator: " + locator + " locatorType: " + locatorType)
+        except:
+            print("Cannot click on the element with locator: " + locator + " locatorType: " + locatorType)
+            print_stack()
+
+    def name_elementClick(self, locator, locatorType="name"):
         try:
             element = self.getElement(locator, locatorType)
             element.click()
@@ -84,7 +94,7 @@ class SeleniumDriver():
             return False
 
     def waitForElement(self, locator, locatorType="id",
-                               timeout=10, pollFrequency=0.5):
+                       timeout=10, pollFrequency=0.5):
         element = None
         try:
             byType = self.getByType(locatorType)
