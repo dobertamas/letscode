@@ -1,4 +1,4 @@
-import logging
+#import logging
 
 from selenium.webdriver.common.by import By
 from traceback import print_stack
@@ -28,6 +28,8 @@ class SeleniumDriver():
             return By.CLASS_NAME
         elif locatorType == "link":
             return By.LINK_TEXT
+        elif locatorType == "tag":
+            return By.TAG_NAME
         else:
             self.log.info("Locator type " + locatorType + " not correct/supported")
         return False
@@ -68,7 +70,7 @@ class SeleniumDriver():
             self.log.info("Sent data on element with locator: " + locator + " locatorType: " + locatorType)
         except:
             self.log.info("Cannot send data on the element with locator: " + locator +
-                  " locatorType: " + locatorType)
+                          " locatorType: " + locatorType)
             print_stack()
 
     def isElementPresent(self, locator, locatorType="id"):
@@ -103,7 +105,7 @@ class SeleniumDriver():
         try:
             byType = self.getByType(locatorType)
             self.log.info("Waiting for maximum :: " + str(timeout) +
-                  " :: seconds for element to be clickable")
+                          " :: seconds for element to be clickable")
             wait = WebDriverWait(self.driver, timeout, poll_frequency=pollFrequency,
                                  ignored_exceptions=[NoSuchElementException,
                                                      ElementNotVisibleException,
@@ -114,3 +116,6 @@ class SeleniumDriver():
             self.log.info("Element not appeared on the web page")
             print_stack()
         return element
+
+
+

@@ -14,3 +14,8 @@ class LoginTests(unittest.TestCase):
 
         login_page = LoginPage(driver)
         login_page.login("admin", "admin")
+
+        self.assertTrue(login_page.verifyPageTitlePresent())
+        self.assertEquals(driver.title, "HMS: Global Prefs")
+
+        driver.quit()

@@ -1,5 +1,3 @@
-# import time
-
 from ..base.selenium_driver import SeleniumDriver
 from ..utilities.custom_logger import *
 
@@ -16,6 +14,8 @@ class LoginPage(SeleniumDriver):
     _username_field = "username"
     _password_field = "password"
     _login_button = "signin"
+    _title = "title"
+    _page_title = "HMS: Global Prefs"
 
     def enter_username(self, email):
         self.sendKeys(email, self._username_field, locatorType="name")
@@ -31,3 +31,6 @@ class LoginPage(SeleniumDriver):
         self.enterPassword(password)
         # time.sleep(30)
         self.clickLoginButton()
+
+    def verifyPageTitlePresent(self):
+        return self.isElementPresent(self._title, locatorType="tag")
