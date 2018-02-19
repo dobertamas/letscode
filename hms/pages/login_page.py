@@ -26,7 +26,7 @@ class LoginPage(SeleniumDriver):
     def clickLoginButton(self):
         self.elementClick(self._login_button, locatorType="name")
 
-    def login(self, email, password):
+    def login(self, email="", password=""):
         self.enter_username(email)
         self.enterPassword(password)
         # time.sleep(30)

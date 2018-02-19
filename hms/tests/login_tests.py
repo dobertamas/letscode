@@ -1,7 +1,7 @@
 from selenium import webdriver
-from ..pages.login_page import LoginPage
 import unittest
-import pytest
+# from ..pages.login_page import LoginPage
+from hms.pages.login_page import LoginPage
 
 
 class LoginTests(unittest.TestCase):
@@ -13,15 +13,13 @@ class LoginTests(unittest.TestCase):
 
     login_page = LoginPage(driver)
 
-    @pytest.mark.run(order=1)
     def test_valid_login(self):
         self.login_page.login("admin", "admin")
 
         self.assertTrue(self.login_page.verifyPageTitlePresent())
         self.assertEquals(self.driver.title, "HMS: Global Prefs")
 
-        # driver.quit()
+        self.driver.quit()
 
-    @pytest.mark.run(order=2)
     def test_inValid_login(self):
         pass
